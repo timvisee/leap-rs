@@ -1,0 +1,10 @@
+[package]
+authors = ["panicbit <panicbit.dev@gmail.com>"]
+build = "build.rs"
+name = "leapmotion"
+version = "0.1.0"
+
+[dependencies]
+
+[build-dependencies]
+cmake = "0.1.17"
