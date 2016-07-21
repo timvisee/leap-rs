@@ -26,6 +26,14 @@ impl Pointable {
     }
 }
 
+impl Drop for Pointable {
+    fn drop(&mut self) {
+        unsafe {
+            raw::lm_pointable_delete(self.raw);
+        }
+    }
+}
+
 pub struct PointableList {
     raw: *mut raw::PointableList
 }

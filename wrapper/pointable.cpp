@@ -11,6 +11,10 @@ extern "C" {
         return self->touchDistance();
     }
 
+    void lm_pointable_delete(LM_Pointable self) {
+        delete self;
+    }
+
     int lm_pointable_list_count(LM_PointableList self) {
         return self->count();
     }
