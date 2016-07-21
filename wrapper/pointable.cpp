@@ -1,7 +1,16 @@
+#include <cstdint>
 #include <Leap.h>
 #include "pointable.h"
 
 extern "C" {
+    int32_t lm_pointable_id(LM_Pointable self) {
+        return self->id();
+    }
+
+    float lm_pointable_touch_distance(LM_Pointable self) {
+        return self->touchDistance();
+    }
+
     int lm_pointable_list_count(LM_PointableList self) {
         return self->count();
     }

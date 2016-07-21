@@ -11,6 +11,19 @@ impl Pointable {
             raw: raw
         }
     }
+
+    /// returned id might be negative
+    pub fn id(&self) -> i32 {
+        unsafe {
+            raw::lm_pointable_id(self.raw)
+        }
+    }
+
+    pub fn touch_distance(&self) -> f32 {
+        unsafe {
+            raw::lm_pointable_touch_distance(self.raw)
+        }
+    }
 }
 
 pub struct PointableList {
@@ -33,7 +46,6 @@ impl PointableList {
     pub fn at(&self, index: usize) -> Option<Pointable> {
         unsafe {
             if index < self.count() {
-                println!("getting pointable at {}", index);
                 Some(Pointable::from_raw(raw::lm_pointable_list_at(self.raw, index as c_int)))
             }
             else {

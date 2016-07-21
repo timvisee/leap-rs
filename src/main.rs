@@ -14,9 +14,8 @@ fn main() {
             let frame = controller.frame();
             println!("fps = {}, pointables = {}", frame.current_fps(), frame.pointables().count());
             for pointable in frame.pointables().iter() {
-                print!("[p] ");
+                println!("[p]: id = {}, td = {}", pointable.id(), pointable.touch_distance());
             }
-            println!("");
         }
         else {
             println!("Not connected!");
