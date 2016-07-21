@@ -58,6 +58,23 @@ impl PointableList {
         }
     }
 
+    pub fn is_empty(&self) -> bool {
+        unsafe {
+            raw::lm_pointable_list_is_empty(self.raw)
+        }
+    }
+
+    pub fn frontmost(&self) -> Option<Pointable> {
+        unsafe {
+            if self.is_empty() {
+                None
+            }
+            else {
+                Some(Pointable::from_raw(raw::lm_pointable_list_frontmost(self.raw)))
+            }
+        }
+    }
+
     pub fn at(&self, index: usize) -> Option<Pointable> {
         unsafe {
             if index < self.count() {

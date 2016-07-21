@@ -24,6 +24,14 @@ extern "C" {
         return self->count();
     }
 
+    bool lm_pointable_list_is_empty(LM_PointableList self) {
+        return self->isEmpty();
+    }
+
+    LM_Pointable lm_pointable_list_frontmost(LM_PointableList self) {
+        return new Leap::Pointable(self->frontmost());
+    }
+
     void lm_pointable_list_delete(LM_PointableList self) {
         delete self;
     }
