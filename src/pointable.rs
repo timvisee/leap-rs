@@ -1,7 +1,7 @@
 use std::os::raw::c_int;
 use raw;
 
-struct Pointable {
+pub struct Pointable {
     raw: *mut raw::Pointable
 }
 
@@ -70,7 +70,7 @@ impl Drop for PointableList {
     }
 }
 
-struct Iter<'a> {
+pub struct Iter<'a> {
     list: &'a PointableList,
     index: usize
 }
