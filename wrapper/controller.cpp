@@ -1,8 +1,6 @@
-#include <stdio.h>
 #include <Leap.h>
-#include <unistd.h>
-
-typedef Leap::Controller* LM_Controller;
+#include "controller.h"
+#include "frame.h"
 
 extern "C" {
     LM_Controller lm_controller_new() {
@@ -15,5 +13,9 @@ extern "C" {
 
     void lm_controller_delete(LM_Controller self) {
         delete self;
+    }
+
+    LM_Frame lm_controller_frame(LM_Controller self) {
+        return new Leap::Frame(self->frame());
     }
 }

@@ -1,5 +1,6 @@
 mod raw;
 mod controller;
+mod frame;
 
 use std::thread::sleep_ms;
 use controller::Controller;
@@ -7,9 +8,15 @@ use controller::Controller;
 fn main() {
     let controller = Controller::new();
 
-    while !controller.is_connected() {
-        println!("Not connected!");
-        sleep_ms(2000);
+    loop {
+        if controller.is_connected() {
+            let frame = controller.frame();
+            println!("fps = {}", frame.current_fps());
+        }
+        else {
+            println!("Not connected!");
+        }
+        sleep_ms(150);
     }
 
     println!("CONNECTED!");
