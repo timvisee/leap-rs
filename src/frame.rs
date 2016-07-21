@@ -5,7 +5,7 @@ pub struct Frame {
 }
 
 impl Frame {
-    pub fn from_raw(raw: *mut raw::Frame) -> Frame {
+    pub unsafe fn from_raw(raw: *mut raw::Frame) -> Frame {
         Frame {
             raw: raw
         }
