@@ -4,7 +4,10 @@ build = "build.rs"
 name = "leap"
 version = "0.1.0"
 
-[dependencies]
-
 [build-dependencies]
 cmake = "0.1.17"
+
+[dependencies]
+
+[dev-dependencies]
+rustbox = "0.8.1"
