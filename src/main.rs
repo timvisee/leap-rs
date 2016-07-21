@@ -1,6 +1,7 @@
 mod raw;
 mod controller;
 mod frame;
+mod pointable;
 
 use std::thread::sleep_ms;
 use controller::Controller;
@@ -11,7 +12,7 @@ fn main() {
     loop {
         if controller.is_connected() {
             let frame = controller.frame();
-            println!("fps = {}", frame.current_fps());
+            println!("fps = {}, pointables = {}", frame.current_fps(), frame.pointables().count());
         }
         else {
             println!("Not connected!");
@@ -19,5 +20,4 @@ fn main() {
         sleep_ms(150);
     }
 
-    println!("CONNECTED!");
 }

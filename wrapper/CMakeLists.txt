@@ -9,6 +9,7 @@ set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_library (leap_motion_wrapper STATIC
     controller.cpp
     frame.cpp
+    pointable.cpp
 )
 
 target_link_libraries(leap_motion_wrapper ${LEAP_LIBRARIES})
