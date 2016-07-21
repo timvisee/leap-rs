@@ -11,7 +11,7 @@ fn main() {
             let frame = controller.frame();
             println!("fps = {}, pointables = {}", frame.current_fps(), frame.pointables().count());
             for pointable in frame.pointables().iter() {
-                println!("[p]: id = {}, td = {}", pointable.id(), pointable.touch_distance());
+                println!("[p]: id = {}, td = {:.1}", pointable.id(), pointable.touch_distance());
             }
         }
         else {
