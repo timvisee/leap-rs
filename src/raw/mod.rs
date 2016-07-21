@@ -6,3 +6,6 @@ pub use self::frame::*;
 
 pub mod pointable;
 pub use self::pointable::*;
+
+pub mod vector;
+pub use self::vector::*;

@@ -8,3 +8,6 @@ pub use frame::Frame;
 
 pub mod pointable;
 pub use pointable::{Pointable, PointableList};
+
+pub mod vector;
+pub use vector::Vector;

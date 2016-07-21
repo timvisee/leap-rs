@@ -1,5 +1,6 @@
 use std::os::raw::c_int;
 use raw;
+use Vector;
 
 pub struct Pointable {
     raw: *mut raw::Pointable
@@ -22,6 +23,12 @@ impl Pointable {
     pub fn touch_distance(&self) -> f32 {
         unsafe {
             raw::lm_pointable_touch_distance(self.raw)
+        }
+    }
+
+    pub fn stabilized_tip_position(&self) -> Vector {
+        unsafe {
+            Vector::from_raw(raw::lm_pointable_stabilized_tip_position(self.raw))
         }
     }
 }
