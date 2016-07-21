@@ -9,4 +9,8 @@ extern "C" {
     void lm_pointable_list_delete(LM_PointableList self) {
         delete self;
     }
+
+    LM_Pointable lm_pointable_list_at(LM_PointableList self, int index) {
+        return new Leap::Pointable((*self)[index]);
+    }
 }

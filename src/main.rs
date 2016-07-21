@@ -13,6 +13,10 @@ fn main() {
         if controller.is_connected() {
             let frame = controller.frame();
             println!("fps = {}, pointables = {}", frame.current_fps(), frame.pointables().count());
+            for pointable in frame.pointables().iter() {
+                print!("[p] ");
+            }
+            println!("");
         }
         else {
             println!("Not connected!");
