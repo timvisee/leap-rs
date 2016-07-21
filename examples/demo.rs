@@ -1,10 +1,7 @@
-mod raw;
-mod controller;
-mod frame;
-mod pointable;
+extern crate leap;
 
 use std::thread::sleep_ms;
-use controller::Controller;
+use leap::Controller;
 
 fn main() {
     let controller = Controller::new();
