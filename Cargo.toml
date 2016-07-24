@@ -8,6 +8,7 @@ version = "0.1.0"
 cmake = "0.1.17"
 
 [dependencies]
+libc = "0.2.14"
 
 [dev-dependencies]
 rustbox = "0.8.1"

@@ -1,7 +1,9 @@
+extern crate libc;
+
 pub mod raw;
 
 pub mod controller;
-pub use controller::Controller;
+pub use controller::{Controller,Listener};
 
 pub mod frame;
 pub use frame::Frame;
