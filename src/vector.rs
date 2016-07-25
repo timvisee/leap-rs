@@ -28,6 +28,10 @@ impl Vector {
             raw::lm_vector_z(self.raw)
         }
     }
+
+    pub fn as_raw(&self) -> *mut raw::Vector {
+        self.raw
+    }
 }
 
 impl Drop for Vector {

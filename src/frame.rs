@@ -1,5 +1,6 @@
 use raw;
-use super::pointable::PointableList;
+use PointableList;
+use InteractionBox;
 
 pub struct Frame {
     raw: *mut raw::Frame
@@ -21,6 +22,12 @@ impl Frame {
     pub fn pointables(&self) -> PointableList {
         unsafe {
             PointableList::from_raw(raw::lm_frame_pointables(self.raw))
+        }
+    }
+
+    pub fn interaction_box(&self) -> InteractionBox {
+        unsafe {
+            InteractionBox::from_raw(raw::lm_frame_interaction_box(self.raw))
         }
     }
 }

@@ -13,3 +13,6 @@ pub use pointable::{Pointable, PointableList};
 
 pub mod vector;
 pub use vector::Vector;
+
+pub mod interaction_box;
+pub use interaction_box::InteractionBox;

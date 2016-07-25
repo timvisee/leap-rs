@@ -11,6 +11,7 @@ add_library (leap_motion_wrapper STATIC
     frame.cpp
     pointable.cpp
     vector.cpp
+    interaction_box.cpp
 )
 
 target_link_libraries(leap_motion_wrapper ${LEAP_LIBRARIES})

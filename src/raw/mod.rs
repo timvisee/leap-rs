@@ -9,3 +9,6 @@ pub use self::pointable::*;
 
 pub mod vector;
 pub use self::vector::*;
+
+pub mod interaction_box;
+pub use self::interaction_box::*;

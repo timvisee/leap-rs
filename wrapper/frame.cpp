@@ -1,6 +1,7 @@
 #include <Leap.h>
 #include "frame.h"
 #include "pointable.h"
+#include "interaction_box.h"
 
 extern "C" {
     LM_Frame lm_frame_delete(LM_Frame self) {
@@ -13,5 +14,9 @@ extern "C" {
 
     LM_PointableList lm_frame_pointables(LM_Frame self) {
         return new Leap::PointableList(self->pointables());
+    }
+
+    LM_InteractionBox lm_frame_interaction_box(LM_Frame self) {
+        return new Leap::InteractionBox(self->interactionBox());
     }
 }
