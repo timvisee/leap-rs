@@ -16,28 +16,23 @@ fn main() {
     loop {
         let frame = controller.frame();
         if let Some(pointable) = frame.pointables().frontmost() {
-            let pointer = pointable.stabilized_tip_position();
+            let ibox = frame.interaction_box();
+            let point = pointable.stabilized_tip_position();
+            let point = ibox.normalize_point_clamp(&point, false);
 
-            let x = rb.width() / 2;
-            let y = rb.height() / 2;
+            let mut x = rb.width() as f32;
+            let mut y = rb.height() as f32;
 
-            let x = x as f32 + pointer.x().round();
-            let y = y as f32 + (pointer.y().round() - 150.) / -2.;
+            x *=       point.x();
+            y *= 1.0 - point.y();
 
-
-            let x = x as usize;
-            let y = y as usize;
+            let x = x.round() as usize;
+            let y = y.round() as usize;
 
             rb.print(0, 0, RB_NORMAL, Color::Default, Color::Default,
-                &format!("px = {}", pointer.x().round())
-            );
-            rb.print(0, 1, RB_NORMAL, Color::Default, Color::Default,
-                &format!("py = {}", (pointer.y().round() - 150.) / -2.)
-            );
-            rb.print(0, 2, RB_NORMAL, Color::Default, Color::Default,
                 &format!("x = {}", x)
             );
-            rb.print(0, 3, RB_NORMAL, Color::Default, Color::Default,
+            rb.print(0, 1, RB_NORMAL, Color::Default, Color::Default,
                 &format!("y = {}", y)
             );
 
