@@ -23,6 +23,24 @@ impl InteractionBox {
             Vector::from_raw(raw::lm_interaction_box_normalize_point(self.raw, point.as_raw(), clamp))
         }
     }
+
+    pub fn width(&self) -> f32 {
+        unsafe {
+            raw::lm_interaction_box_width(self.raw)
+        }
+    }
+
+    pub fn height(&self) -> f32 {
+        unsafe {
+            raw::lm_interaction_box_height(self.raw)
+        }
+    }
+
+    pub fn depth(&self) -> f32 {
+        unsafe {
+            raw::lm_interaction_box_depth(self.raw)
+        }
+    }
 }
 
 impl Drop for InteractionBox {
