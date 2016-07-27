@@ -2,6 +2,7 @@
 #include <Leap.h>
 #include "pointable.h"
 #include "vector.h"
+#include "list.h"
 
 extern "C" {
     int32_t lm_pointable_id(LM_Pointable self) {
@@ -20,23 +21,6 @@ extern "C" {
         delete self;
     }
 
-    int lm_pointable_list_count(LM_PointableList self) {
-        return self->count();
-    }
-
-    bool lm_pointable_list_is_empty(LM_PointableList self) {
-        return self->isEmpty();
-    }
-
-    LM_Pointable lm_pointable_list_frontmost(LM_PointableList self) {
-        return new Leap::Pointable(self->frontmost());
-    }
-
-    void lm_pointable_list_delete(LM_PointableList self) {
-        delete self;
-    }
-
-    LM_Pointable lm_pointable_list_at(LM_PointableList self, int index) {
-        return new Leap::Pointable((*self)[index]);
-    }
+    LM_LIST_IMPL(Pointable, pointable)
+    LM_LIST_SPATIAL_IMPL(Pointable, pointable)
 }
