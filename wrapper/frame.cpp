@@ -1,6 +1,7 @@
 #include <Leap.h>
 #include "frame.h"
 #include "pointable.h"
+#include "hand.h"
 #include "interaction_box.h"
 
 extern "C" {
@@ -14,6 +15,10 @@ extern "C" {
 
     LM_PointableList lm_frame_pointables(LM_Frame self) {
         return new Leap::PointableList(self->pointables());
+    }
+
+    LM_HandList lm_frame_hands(LM_Frame self) {
+        return new Leap::HandList(self->hands());
     }
 
     LM_InteractionBox lm_frame_interaction_box(LM_Frame self) {

@@ -12,3 +12,6 @@ pub use self::vector::*;
 
 pub mod interaction_box;
 pub use self::interaction_box::*;
+
+pub mod hand;
+pub use self::hand::*;

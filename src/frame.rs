@@ -1,5 +1,6 @@
 use raw;
 use PointableList;
+use HandList;
 use InteractionBox;
 
 pub struct Frame {
@@ -22,6 +23,12 @@ impl Frame {
     pub fn pointables(&self) -> PointableList {
         unsafe {
             PointableList::from_raw(raw::lm_frame_pointables(self.raw))
+        }
+    }
+
+    pub fn hands(&self) -> HandList {
+        unsafe {
+            HandList::from_raw(raw::lm_frame_hands(self.raw))
         }
     }
 
