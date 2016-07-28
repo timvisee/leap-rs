@@ -1,68 +1,7 @@
 #include <Leap.h>
 #include "controller.h"
 #include "frame.h"
-
-class ListenerWrapper: public Leap::Listener {
-private:
-    LM_FFIListener listener;
-
-public:
-    ListenerWrapper(LM_FFIListener listener) {
-        this->listener = listener;
-    }
-
-    void onExit(const Leap::Controller& controller) {
-        this->listener.on_exit(this->listener.handle, controller);
-    }
-
-    void onConnect(const Leap::Controller& controller) {
-        this->listener.on_connect(this->listener.handle, controller);
-    }
-
-    void onFrame(const Leap::Controller& controller) {
-        this->listener.on_frame(this->listener.handle, controller);
-    }
-
-    void onInit(const Leap::Controller& controller) {
-        this->listener.on_init(this->listener.handle, controller);
-    }
-
-    void onDeviceChange(const Leap::Controller& controller) {
-        this->listener.on_device_change(this->listener.handle, controller);
-    }
-
-    void onDeviceFailure(const Leap::Controller& controller) {
-        this->listener.on_device_failure(this->listener.handle, controller);
-    }
-
-    void onDisconnect(const Leap::Controller& controller) {
-        this->listener.on_disconnect(this->listener.handle, controller);
-    }
-
-    void onFocusGained(const Leap::Controller& controller) {
-        this->listener.on_focus_gained(this->listener.handle, controller);
-    }
-
-    void onFocusLost(const Leap::Controller& controller) {
-        this->listener.on_focus_lost(this->listener.handle, controller);
-    }
-
-    void onImages(const Leap::Controller& controller) {
-        this->listener.on_images(this->listener.handle, controller);
-    }
-
-    void onServiceChange(const Leap::Controller& controller) {
-        this->listener.on_service_change(this->listener.handle, controller);
-    }
-
-    void onServiceConnect(const Leap::Controller& controller) {
-        this->listener.on_service_connect(this->listener.handle, controller);
-    }
-
-    void onServiceDisconnect(const Leap::Controller& controller) {
-        this->listener.on_disconnect(this->listener.handle, controller);
-    }
-};
+#include "listener.h"
 
 extern "C" {
     LM_Controller lm_controller_new() {

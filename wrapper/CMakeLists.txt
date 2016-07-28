@@ -13,6 +13,7 @@ add_library (leap_motion_wrapper STATIC
     vector.cpp
     interaction_box.cpp
     hand.cpp
+    listener.cpp
 )
 
 target_link_libraries(leap_motion_wrapper ${LEAP_LIBRARIES})
