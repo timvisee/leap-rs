@@ -26,6 +26,10 @@ public:
     void onInit(const Leap::Controller& controller) {
         this->listener.on_init(this->listener.handle, controller);
     }
+
+    void onDeviceChange(const Leap::Controller& controller) {
+        this->listener.on_device_change(this->listener.handle, controller);
+    }
 };
 
 extern "C" {
