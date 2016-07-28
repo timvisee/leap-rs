@@ -15,6 +15,8 @@ extern "C" {
         LM_ListenerHandler on_frame;
         LM_ListenerHandler on_init;
         LM_ListenerHandler on_device_change;
+        LM_ListenerHandler on_device_failure;
+        LM_ListenerHandler on_disconnect;
     };
 }
 

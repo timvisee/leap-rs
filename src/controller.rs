@@ -89,8 +89,8 @@ pub trait Listener {
     fn on_frame(&mut self, &Controller) {}
     fn on_init(&mut self, &Controller) {}
     fn on_device_change(&mut self, &Controller) {}
-    // fn on_device_failure(&mut self, &Controller) {}
-    // fn on_disconnect(&mut self, &Controller) {}
+    fn on_device_failure(&mut self, &Controller) {}
+    fn on_disconnect(&mut self, &Controller) {}
     // fn on_focus_gained(&mut self, &Controller) {}
     // fn on_focus_lost(&mut self, &Controller) {}
     // fn on_images(&mut self, &Controller) {}
@@ -139,6 +139,22 @@ trait RawListener: Listener {
             let this: &mut Self = mem::transmute_copy(&this);
             let controller = Controller::from_raw_ref(raw_controller);
             this.on_device_change(&controller);
+        }
+    }
+
+    extern fn raw_on_device_failure(this: *mut c_void, raw_controller: *const raw::Controller) {
+        unsafe {
+            let this: &mut Self = mem::transmute_copy(&this);
+            let controller = Controller::from_raw_ref(raw_controller);
+            this.on_device_failure(&controller);
+        }
+    }
+
+    extern fn raw_on_disconnect(this: *mut c_void, raw_controller: *const raw::Controller) {
+        unsafe {
+            let this: &mut Self = mem::transmute_copy(&this);
+            let controller = Controller::from_raw_ref(raw_controller);
+            this.on_disconnect(&controller);
         }
     }
 }

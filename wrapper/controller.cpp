@@ -30,6 +30,14 @@ public:
     void onDeviceChange(const Leap::Controller& controller) {
         this->listener.on_device_change(this->listener.handle, controller);
     }
+
+    void onDeviceFailure(const Leap::Controller& controller) {
+        this->listener.on_device_failure(this->listener.handle, controller);
+    }
+
+    void onDisconnect(const Leap::Controller& controller) {
+        this->listener.on_disconnect(this->listener.handle, controller);
+    }
 };
 
 extern "C" {

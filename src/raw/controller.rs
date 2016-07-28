@@ -24,4 +24,6 @@ pub struct FFIListener {
     pub on_frame: ListenerHandler,
     pub on_init: ListenerHandler,
     pub on_device_change: ListenerHandler,
+    pub on_device_failure: ListenerHandler,
+    pub on_disconnect: ListenerHandler,
 }
