@@ -3,7 +3,7 @@ extern crate libc;
 pub mod raw;
 
 pub mod controller;
-pub use controller::{Controller,Listener};
+pub use controller::Controller;
 
 pub mod frame;
 pub use frame::Frame;
@@ -19,3 +19,6 @@ pub use interaction_box::InteractionBox;
 
 pub mod hand;
 pub use hand::{Hand, HandList};
+
+pub mod listener;
+pub use listener::Listener;
