@@ -100,63 +100,38 @@ pub trait Listener {
     // fn on_service_disconnect(&mut self, Controller) {}
 }
 
-trait RawListener: Listener {
-    extern fn raw_on_exit(this: *mut c_void, raw_controller: *const raw::Controller) {
-        unsafe {
-            let this: *mut Self = mem::transmute_copy(&this);
-            let mut this = Box::from_raw(this);
-            let controller = Controller::from_raw_ref(raw_controller);
-            this.on_exit(&controller);
-        }
-    }
+macro_rules! raw_listener {
+    {$($HANDLER:ident => $FFI_HANDLER:ident),* $(,)*} => {
+        trait RawListener: Listener {
+            $(
+                extern fn $HANDLER(this: *mut c_void, raw_controller: *const raw::Controller) {
+                    unsafe {
+                        let this: &mut Self = mem::transmute_copy(&this);
+                        let controller = Controller::from_raw_ref(raw_controller);
+                        this.$FFI_HANDLER(&controller);
+                    }
+                }
+            )*
 
-    extern fn raw_on_connect(this: *mut c_void, raw_controller: *const raw::Controller) {
-        unsafe {
-            let this: &mut Self = mem::transmute_copy(&this);
-            let controller = Controller::from_raw_ref(raw_controller);
-            this.on_connect(&controller);
+            extern fn raw_on_exit(this: *mut c_void, raw_controller: *const raw::Controller) {
+                unsafe {
+                    let this: *mut Self = mem::transmute_copy(&this);
+                    let mut this = Box::from_raw(this);
+                    let controller = Controller::from_raw_ref(raw_controller);
+                    this.on_exit(&controller);
+                }
+            }
         }
     }
+}
 
-    extern fn raw_on_frame(this: *mut c_void, raw_controller: *const raw::Controller) {
-        unsafe {
-            let this: &mut Self = mem::transmute_copy(&this);
-            let controller = Controller::from_raw_ref(raw_controller);
-            this.on_frame(&controller);
-        }
-    }
-
-    extern fn raw_on_init(this: *mut c_void, raw_controller: *const raw::Controller) {
-        unsafe {
-            let this: &mut Self = mem::transmute_copy(&this);
-            let controller = Controller::from_raw_ref(raw_controller);
-            this.on_init(&controller);
-        }
-    }
-
-    extern fn raw_on_device_change(this: *mut c_void, raw_controller: *const raw::Controller) {
-        unsafe {
-            let this: &mut Self = mem::transmute_copy(&this);
-            let controller = Controller::from_raw_ref(raw_controller);
-            this.on_device_change(&controller);
-        }
-    }
-
-    extern fn raw_on_device_failure(this: *mut c_void, raw_controller: *const raw::Controller) {
-        unsafe {
-            let this: &mut Self = mem::transmute_copy(&this);
-            let controller = Controller::from_raw_ref(raw_controller);
-            this.on_device_failure(&controller);
-        }
-    }
-
-    extern fn raw_on_disconnect(this: *mut c_void, raw_controller: *const raw::Controller) {
-        unsafe {
-            let this: &mut Self = mem::transmute_copy(&this);
-            let controller = Controller::from_raw_ref(raw_controller);
-            this.on_disconnect(&controller);
-        }
-    }
+raw_listener!{
+    raw_on_connect => on_exit,
+    raw_on_frame => on_frame,
+    raw_on_init => on_init,
+    raw_on_device_change => on_device_change,
+    raw_on_device_failure => on_device_failure,
+    raw_on_disconnect => on_disconnect,
 }
 
 impl<L: Listener> RawListener for L {}
