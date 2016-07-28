@@ -170,6 +170,8 @@ impl<L: Listener> From<L> for raw::FFIListener {
             on_frame: L::raw_on_frame,
             on_init: L::raw_on_init,
             on_device_change: L::raw_on_device_change,
+            on_device_failure: L::raw_on_device_failure,
+            on_disconnect: L::raw_on_disconnect,
         }
     }
 }
