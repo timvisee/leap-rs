@@ -3,6 +3,7 @@ use std::ptr;
 use raw;
 use Frame;
 use Listener;
+use DeviceList;
 
 pub struct Controller {
     raw: *mut raw::Controller
@@ -40,6 +41,12 @@ impl Controller {
     pub fn frame(&self) -> Frame {
         unsafe {
             Frame::from_raw(raw::lm_controller_frame(self.raw))
+        }
+    }
+
+    pub fn devices(&self) -> DeviceList {
+        unsafe {
+            DeviceList::from_raw(raw::lm_controller_devices(self.raw))
         }
     }
 }

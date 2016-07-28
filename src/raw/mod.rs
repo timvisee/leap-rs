@@ -18,3 +18,6 @@ pub use self::hand::*;
 
 pub mod listener;
 pub use self::listener::*;
+
+pub mod device;
+pub use self::device::*;

@@ -22,3 +22,6 @@ pub use hand::{Hand, HandList};
 
 pub mod listener;
 pub use listener::Listener;
+
+pub mod device;
+pub use device::{Device, DeviceList};

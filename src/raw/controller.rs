@@ -1,4 +1,4 @@
-use super::{Frame, FFIListener};
+use super::{Frame, FFIListener, DeviceList};
 
 pub enum Controller {}
 
@@ -8,4 +8,5 @@ extern {
     pub fn lm_controller_is_connected(this: *mut Controller) -> bool;
     pub fn lm_controller_delete(this: *mut Controller);
     pub fn lm_controller_frame(this: *mut Controller) -> *mut Frame;
+    pub fn lm_controller_devices(this: *mut Controller) -> *mut DeviceList;
 }

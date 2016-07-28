@@ -2,6 +2,7 @@
 #include "controller.h"
 #include "frame.h"
 #include "listener.h"
+#include "device.h"
 
 extern "C" {
     LM_Controller lm_controller_new() {
@@ -23,5 +24,9 @@ extern "C" {
 
     LM_Frame lm_controller_frame(LM_Controller self) {
         return new Leap::Frame(self->frame());
+    }
+
+    LM_DeviceList lm_controller_devices(LM_Controller self) {
+        return new Leap::DeviceList(self->devices());
     }
 }
