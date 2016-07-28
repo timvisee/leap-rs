@@ -38,6 +38,30 @@ public:
     void onDisconnect(const Leap::Controller& controller) {
         this->listener.on_disconnect(this->listener.handle, controller);
     }
+
+    void onFocusGained(const Leap::Controller& controller) {
+        this->listener.on_focus_gained(this->listener.handle, controller);
+    }
+
+    void onFocusLost(const Leap::Controller& controller) {
+        this->listener.on_focus_lost(this->listener.handle, controller);
+    }
+
+    void onImages(const Leap::Controller& controller) {
+        this->listener.on_images(this->listener.handle, controller);
+    }
+
+    void onServiceChange(const Leap::Controller& controller) {
+        this->listener.on_service_change(this->listener.handle, controller);
+    }
+
+    void onServiceConnect(const Leap::Controller& controller) {
+        this->listener.on_service_connect(this->listener.handle, controller);
+    }
+
+    void onServiceDisconnect(const Leap::Controller& controller) {
+        this->listener.on_disconnect(this->listener.handle, controller);
+    }
 };
 
 extern "C" {

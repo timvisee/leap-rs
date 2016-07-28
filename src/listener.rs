@@ -11,13 +11,13 @@ pub trait Listener {
     fn on_device_change(&mut self, &Controller) {}
     fn on_device_failure(&mut self, &Controller) {}
     fn on_disconnect(&mut self, &Controller) {}
-    // fn on_focus_gained(&mut self, &Controller) {}
-    // fn on_focus_lost(&mut self, &Controller) {}
-    // fn on_images(&mut self, &Controller) {}
+    fn on_focus_gained(&mut self, &Controller) {}
+    fn on_focus_lost(&mut self, &Controller) {}
+    fn on_images(&mut self, &Controller) {}
+    fn on_service_change(&mut self, &Controller) {}
+    fn on_service_connect(&mut self, &Controller) {}
+    fn on_service_disconnect(&mut self, &Controller) {}
     // fn on_log_message(&mut self, &Controller, MessageSeverity, Timestamp, message: String) {}
-    // fn on_service_change(&mut self, Controller) {}
-    // fn on_service_connect(&mut self, Controller) {}
-    // fn on_service_disconnect(&mut self, Controller) {}
 }
 
 macro_rules! raw_listener {
@@ -52,6 +52,12 @@ raw_listener!{
     raw_on_device_change => on_device_change,
     raw_on_device_failure => on_device_failure,
     raw_on_disconnect => on_disconnect,
+    raw_on_focus_gained => on_focus_gained,
+    raw_on_focus_lost => on_focus_lost,
+    raw_on_images => on_images,
+    raw_on_service_change => on_service_change,
+    raw_on_service_connect => on_service_connect,
+    raw_on_service_disconnect => on_service_disconnect,
 }
 
 impl<L: Listener> RawListener for L {}
@@ -67,6 +73,12 @@ impl<L: Listener> From<L> for raw::FFIListener {
             on_device_change: L::raw_on_device_change,
             on_device_failure: L::raw_on_device_failure,
             on_disconnect: L::raw_on_disconnect,
+            on_focus_gained: L::raw_on_focus_gained,
+            on_focus_lost: L::raw_on_focus_lost,
+            on_images: L::raw_on_images,
+            on_service_change: L::raw_on_service_change,
+            on_service_connect: L::raw_on_service_connect,
+            on_service_disconnect: L::raw_on_service_disconnect,
         }
     }
 }

@@ -26,4 +26,10 @@ pub struct FFIListener {
     pub on_device_change: ListenerHandler,
     pub on_device_failure: ListenerHandler,
     pub on_disconnect: ListenerHandler,
+    pub on_focus_gained: ListenerHandler,
+    pub on_focus_lost: ListenerHandler,
+    pub on_images: ListenerHandler,
+    pub on_service_change: ListenerHandler,
+    pub on_service_connect: ListenerHandler,
+    pub on_service_disconnect: ListenerHandler,
 }

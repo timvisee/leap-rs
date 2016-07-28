@@ -17,6 +17,12 @@ extern "C" {
         LM_ListenerHandler on_device_change;
         LM_ListenerHandler on_device_failure;
         LM_ListenerHandler on_disconnect;
+        LM_ListenerHandler on_focus_gained;
+        LM_ListenerHandler on_focus_lost;
+        LM_ListenerHandler on_images;
+        LM_ListenerHandler on_service_change;
+        LM_ListenerHandler on_service_connect;
+        LM_ListenerHandler on_service_disconnect;
     };
 }
 
