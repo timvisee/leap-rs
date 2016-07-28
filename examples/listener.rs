@@ -21,7 +21,7 @@ impl leap::Listener for DemoListener {
 
     fn on_frame(&mut self, controller: &Controller) {
         let frame = controller.frame();
-        println!("fps = {}, pointables = {}", frame.current_fps(), frame.pointables().count());
+        println!("fps = {}, pointables = {}", frame.current_fps(), frame.pointables().len());
         for pointable in frame.pointables().iter() {
             let stp = pointable.stabilized_tip_position();
             println!("[p]: id = {id}, td = {td:.1}, stp = ({x:.1}, {y:.1}, {z:.1})",

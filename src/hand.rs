@@ -52,7 +52,7 @@ impl HandList {
         }
     }
 
-    pub fn count(&self) -> usize {
+    pub fn len(&self) -> usize {
         unsafe {
             raw::lm_hand_list_count(self.raw) as usize
         }
@@ -75,9 +75,9 @@ impl HandList {
         }
     }
 
-    pub fn at(&self, index: usize) -> Option<Hand> {
+    pub fn get(&self, index: usize) -> Option<Hand> {
         unsafe {
-            if index < self.count() {
+            if index < self.len() {
                 Some(Hand::from_raw(raw::lm_hand_list_at(self.raw, index as c_int)))
             }
             else {
@@ -111,7 +111,7 @@ impl<'a> Iterator for Iter<'a> {
     type Item = Hand;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if let Some(hand) = self.list.at(self.index) {
+        if let Some(hand) = self.list.get(self.index) {
             self.index += 1;
             Some(hand)
         }

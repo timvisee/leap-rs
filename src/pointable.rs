@@ -52,7 +52,7 @@ impl PointableList {
         }
     }
 
-    pub fn count(&self) -> usize {
+    pub fn len(&self) -> usize {
         unsafe {
             raw::lm_pointable_list_count(self.raw) as usize
         }
@@ -75,9 +75,9 @@ impl PointableList {
         }
     }
 
-    pub fn at(&self, index: usize) -> Option<Pointable> {
+    pub fn get(&self, index: usize) -> Option<Pointable> {
         unsafe {
-            if index < self.count() {
+            if index < self.len() {
                 Some(Pointable::from_raw(raw::lm_pointable_list_at(self.raw, index as c_int)))
             }
             else {
@@ -111,7 +111,7 @@ impl<'a> Iterator for Iter<'a> {
     type Item = Pointable;
 
     fn next(&mut self) -> Option<Self::Item> {
-        if let Some(pointable) = self.list.at(self.index) {
+        if let Some(pointable) = self.list.get(self.index) {
             self.index += 1;
             Some(pointable)
         }
