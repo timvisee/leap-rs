@@ -7,7 +7,7 @@ extern "C" {
     typedef void* LM_Listener;
     typedef void (*LM_ListenerHandler)(LM_Listener, const Leap::Controller &);
 
-    // KEEP IN PERFECT SYNC WITH FFIListener from src/raw/controller.rs
+    // KEEP IN PERFECT SYNC WITH FFIListener from src/raw/listener.rs
     struct LM_FFIListener {
         LM_Listener handle;
         LM_ListenerHandler on_exit;
