@@ -87,7 +87,7 @@ pub trait Listener {
     fn on_exit(&mut self, &Controller) {}
     fn on_connect(&mut self, &Controller) {}
     fn on_frame(&mut self, &Controller) {}
-    // fn on_init(&mut self, &Controller) {}
+    fn on_init(&mut self, &Controller) {}
     // fn on_device_change(&mut self, &Controller) {}
     // fn on_device_failure(&mut self, &Controller) {}
     // fn on_disconnect(&mut self, &Controller) {}
@@ -125,6 +125,14 @@ trait RawListener: Listener {
             this.on_frame(&controller);
         }
     }
+
+    extern fn raw_on_init(this: *mut c_void, raw_controller: *const raw::Controller) {
+        unsafe {
+            let this: &mut Self = mem::transmute_copy(&this);
+            let controller = Controller::from_raw_ref(raw_controller);
+            this.on_init(&controller);
+        }
+    }
 }
 
 impl<L: Listener> RawListener for L {}
@@ -136,6 +144,7 @@ impl<L: Listener> From<L> for raw::FFIListener {
             on_exit: L::raw_on_exit,
             on_connect: L::raw_on_connect,
             on_frame: L::raw_on_frame,
+            on_init: L::raw_on_init,
         }
     }
 }

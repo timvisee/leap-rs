@@ -22,4 +22,5 @@ pub struct FFIListener {
     pub on_exit: ListenerHandler,
     pub on_connect: ListenerHandler,
     pub on_frame: ListenerHandler,
+    pub on_init: ListenerHandler,
 }

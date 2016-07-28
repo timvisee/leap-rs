@@ -13,6 +13,7 @@ extern "C" {
         LM_ListenerHandler on_exit;
         LM_ListenerHandler on_connect;
         LM_ListenerHandler on_frame;
+        LM_ListenerHandler on_init;
     };
 }
 

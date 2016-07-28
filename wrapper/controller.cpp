@@ -22,6 +22,10 @@ public:
     void onFrame(const Leap::Controller& controller) {
         this->listener.on_frame(this->listener.handle, controller);
     }
+
+    void onInit(const Leap::Controller& controller) {
+        this->listener.on_init(this->listener.handle, controller);
+    }
 };
 
 extern "C" {
