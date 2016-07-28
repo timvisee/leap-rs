@@ -1,9 +1,8 @@
-use std::mem;
 use libc::c_void;
 use raw;
 use Controller;
 
-pub trait Listener {
+pub trait Listener: Sized {
     fn on_exit(&mut self, &Controller) {}
     fn on_connect(&mut self, &Controller) {}
     fn on_frame(&mut self, &Controller) {}
@@ -22,31 +21,27 @@ pub trait Listener {
 
 macro_rules! raw_listener {
     {$($HANDLER:ident => $FFI_HANDLER:ident),* $(,)*} => {
-        trait RawListener: Listener {
+        trait RawListener: Listener + Sized {
             $(
-                extern fn $HANDLER(this: *mut c_void, raw_controller: *const raw::Controller) {
-                    unsafe {
-                        let this: &mut Self = mem::transmute_copy(&this);
-                        let controller = Controller::from_raw_ref(raw_controller);
-                        this.$FFI_HANDLER(&controller);
-                    }
+                unsafe extern fn $HANDLER(this: *mut c_void, raw_controller: *const raw::Controller) {
+                    let this = &mut *(this as *mut Self);
+                    let controller = Controller::from_raw_ref(raw_controller);
+                    this.$FFI_HANDLER(&controller);
                 }
             )*
 
-            extern fn raw_on_exit(this: *mut c_void, raw_controller: *const raw::Controller) {
-                unsafe {
-                    let this: *mut Self = mem::transmute_copy(&this);
-                    let mut this = Box::from_raw(this);
-                    let controller = Controller::from_raw_ref(raw_controller);
-                    this.on_exit(&controller);
-                }
+            unsafe extern fn raw_on_exit(this: *mut c_void, raw_controller: *const raw::Controller) {
+                let this: *mut Self = this as *mut Self;
+                let mut this = Box::from_raw(this);
+                let controller = Controller::from_raw_ref(raw_controller);
+                this.on_exit(&controller);
             }
         }
     }
 }
 
 raw_listener!{
-    raw_on_connect => on_exit,
+    raw_on_connect => on_connect,
     raw_on_frame => on_frame,
     raw_on_init => on_init,
     raw_on_device_change => on_device_change,

@@ -2,7 +2,7 @@ use libc::c_void;
 use super::Controller;
 
 pub type Listener = *mut c_void;
-pub type ListenerHandler = extern fn(Listener, *const Controller);
+pub type ListenerHandler = unsafe extern fn(Listener, *const Controller);
 
 // KEEP IN PERFECT SYNC WITH LM_FFIListener from wrapper/controller.h
 #[repr(C)]
