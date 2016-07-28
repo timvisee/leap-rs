@@ -11,6 +11,62 @@ impl Device {
             raw: raw
         }
     }
+
+    pub fn baseline(&self) -> f32 {
+        unsafe {
+            raw::lm_device_baseline(self.raw)
+        }
+    }
+
+    pub fn horizontal_view_angle(&self) -> f32 {
+        unsafe {
+            raw::lm_device_horizontal_view_angle(self.raw)
+        }
+    }
+
+    pub fn is_embedded(&self) -> bool {
+        unsafe {
+            raw::lm_device_is_embedded(self.raw)
+        }
+    }
+
+    // Blocked by 3.0 release
+    // pub fn is_lighting_bad(&self) -> bool {
+    //     unsafe {
+    //         raw::lm_device_is_lighting_bad(self.raw)
+    //     }
+    // }
+
+    // Blocked by 3.0 release
+    // pub fn is_smudged(&self) -> bool {
+    //     unsafe {
+    //         raw::lm_device_is_smudged(self.raw)
+    //     }
+    // }
+
+    pub fn is_streaming(&self) -> bool {
+        unsafe {
+            raw::lm_device_is_streaming(self.raw)
+        }
+    }
+
+    pub fn is_valid(&self) -> bool {
+        unsafe {
+            raw::lm_device_is_valid(self.raw)
+        }
+    }
+
+    pub fn range(&self) -> f32 {
+        unsafe {
+            raw::lm_device_range(self.raw)
+        }
+    }
+
+    pub fn vertical_view_angle(&self) -> f32 {
+        unsafe {
+            raw::lm_device_vertical_view_angle(self.raw)
+        }
+    }
 }
 
 impl Drop for Device {
