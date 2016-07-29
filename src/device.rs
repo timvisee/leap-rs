@@ -79,7 +79,7 @@ impl Device {
         unsafe {
             let mut result = Ok(String::new());
 
-            raw::lm_device_serial_number(self.raw, &mut result as *mut _ as _, init_cb);
+            raw::lm_device_serial_number(self.raw, &mut result as *mut _ as *mut _, init_cb);
 
             result
         }
