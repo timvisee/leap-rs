@@ -18,6 +18,18 @@ extern "C" {
         return self->z;
     }
 
+    float lm_vector_yaw(LM_Vector self) {
+        return self->yaw();
+    }
+
+    float lm_vector_pitch(LM_Vector self) {
+        return self->pitch();
+    }
+
+    float lm_vector_roll(LM_Vector self) {
+        return self->roll();
+    }
+
     LM_Vector lm_vector_mul(const LM_Vector self, float factor) {
         return new Leap::Vector(*self * factor);
     }

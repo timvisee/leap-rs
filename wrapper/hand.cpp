@@ -18,6 +18,10 @@ extern "C" {
         return new Leap::Vector(self->stabilizedPalmPosition());
     }
 
+    LM_Vector lm_hand_direction(LM_Hand self) {
+        return new Leap::Vector(self->direction());
+    }
+
     void lm_hand_delete(LM_Hand self) {
         delete self;
     }

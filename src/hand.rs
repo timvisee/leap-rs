@@ -31,6 +31,12 @@ impl Hand {
             Vector::from_raw(raw::lm_hand_stabilized_palm_position(self.raw))
         }
     }
+
+    pub fn direction(&self) -> Vector {
+        unsafe {
+            Vector::from_raw(raw::lm_hand_direction(self.raw))
+        }
+    }
 }
 
 impl Drop for Hand {

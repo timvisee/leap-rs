@@ -36,6 +36,24 @@ impl Vector {
         }
     }
 
+    pub fn yaw(&self) -> f32 {
+        unsafe {
+            raw::lm_vector_yaw(self.raw)
+        }
+    }
+
+    pub fn pitch(&self) -> f32 {
+        unsafe {
+            raw::lm_vector_pitch(self.raw)
+        }
+    }
+
+    pub fn roll(&self) -> f32 {
+        unsafe {
+            raw::lm_vector_roll(self.raw)
+        }
+    }
+
     pub fn as_raw(&self) -> *mut raw::Vector {
         self.raw
     }
