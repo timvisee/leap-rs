@@ -1,5 +1,7 @@
-use std::os::raw::c_int;
+use libc::{c_int, c_char, c_void};
 use raw;
+use std::ffi::CStr;
+use std::str::Utf8Error;
 
 pub struct Device {
     raw: *mut raw::Device
@@ -65,6 +67,21 @@ impl Device {
     pub fn vertical_view_angle(&self) -> f32 {
         unsafe {
             raw::lm_device_vertical_view_angle(self.raw)
+        }
+    }
+
+    pub fn serial_number(&self) -> Result<String, Utf8Error> {
+        unsafe extern fn init_cb(ret: *mut c_void, data: *const c_char) {
+            let ret = ret as *mut Result<String, Utf8Error>;
+            *ret = CStr::from_ptr(data).to_str().map(|s| s.to_string());
+        }
+
+        unsafe {
+            let mut result = Ok(String::new());
+
+            raw::lm_device_serial_number(self.raw, &mut result as *mut _ as _, init_cb);
+
+            result
         }
     }
 }

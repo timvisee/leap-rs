@@ -45,5 +45,10 @@ extern "C" {
         return self->verticalViewAngle();
     }
 
+    void lm_device_serial_number(LM_Device self, void* ret, void (*init_cb)(void*, const char*)) {
+        std::string serial_number = self->serialNumber();
+        init_cb(ret, serial_number.c_str());
+    }
+
     LM_LIST_IMPL(Device, device)
 }
