@@ -15,7 +15,7 @@ fn main() {
 
     loop {
         let frame = controller.frame();
-        if let Some(pointable) = frame.pointables().frontmost() {
+        for pointable in frame.pointables().iter() {
             let ibox = frame.interaction_box();
             let point = pointable.stabilized_tip_position();
             let point = ibox.normalize_point_clamp(&point, false);
@@ -29,21 +29,33 @@ fn main() {
             let x = x.round() as usize;
             let y = y.round() as usize;
 
-            rb.print(0, 0, RB_NORMAL, Color::Default, Color::Default,
-                &format!("x = {}", x)
-            );
-            rb.print(0, 1, RB_NORMAL, Color::Default, Color::Default,
-                &format!("y = {}", y)
-            );
+            if x < 2000 && y < 2000 {
+                let fg_color = color_from_i32(pointable.id());
+                rb.print(x, y, RB_NORMAL, fg_color, Color::Default, &format!("# {}", pointable.id()));
+            }
 
-            rb.print_char(x, y, RB_NORMAL, Color::Default, Color::Default, '#');
         }
 
-        if let Ok(KeyEvent(Key::Char('q'))) = rb.peek_event(Duration::from_millis(1), false) {
+        if let Ok(KeyEvent(Key::Char('q'))) = rb.peek_event(Duration::from_millis(10), false) {
             break
         }
 
         rb.present();
         rb.clear();
+    }
+}
+
+fn color_from_i32(n: i32) -> Color {
+    use rustbox::Color::*;
+    let n = n.abs() % 6;
+
+    match n {
+        0 => Red,
+        1 => Green,
+        2 => Blue,
+        3 => Magenta,
+        4 => Yellow,
+        5 => Cyan,
+        _ => unreachable!()
     }
 }
