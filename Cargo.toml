@@ -5,10 +5,10 @@ name = "leap"
 version = "0.1.0"
 
 [build-dependencies]
-cmake = "0.1.17"
+cmake = "0.1"
 
 [dependencies]
-libc = "0.2.14"
+libc = "0.2"
 
 [dev-dependencies]
-rustbox = "0.8.1"
+rustbox = "0.11"
