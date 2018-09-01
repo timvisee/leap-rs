@@ -11,7 +11,7 @@ impl Vector {
     }
 
     pub unsafe fn from_raw(raw: *mut raw::Vector) -> Vector {
-        Vector { raw: raw }
+        Vector { raw }
     }
 
     pub fn x(&self) -> f32 {

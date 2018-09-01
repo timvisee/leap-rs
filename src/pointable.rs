@@ -8,7 +8,7 @@ pub struct Pointable {
 
 impl Pointable {
     pub unsafe fn from_raw(raw: *mut raw::Pointable) -> Pointable {
-        Pointable { raw: raw }
+        Pointable { raw }
     }
 
     /// returned id might be negative
@@ -39,7 +39,7 @@ pub struct PointableList {
 
 impl PointableList {
     pub unsafe fn from_raw(raw: *mut raw::PointableList) -> PointableList {
-        PointableList { raw: raw }
+        PointableList { raw }
     }
 
     pub fn len(&self) -> usize {

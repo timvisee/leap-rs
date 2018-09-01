@@ -15,7 +15,7 @@ impl Controller {
     }
 
     pub unsafe fn from_raw(raw: *mut raw::Controller) -> Controller {
-        Controller { raw: raw }
+        Controller { raw }
     }
 
     pub unsafe fn from_raw_ref(raw: *const raw::Controller) -> Ref {
@@ -47,6 +47,12 @@ impl Drop for Controller {
                 raw::lm_controller_delete(self.raw);
             }
         }
+    }
+}
+
+impl Default for Controller {
+    fn default() -> Self {
+        Self::new()
     }
 }
 

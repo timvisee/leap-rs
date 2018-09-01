@@ -9,7 +9,7 @@ pub struct Frame {
 
 impl Frame {
     pub unsafe fn from_raw(raw: *mut raw::Frame) -> Frame {
-        Frame { raw: raw }
+        Frame { raw }
     }
 
     pub fn current_fps(&self) -> f32 {

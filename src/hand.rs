@@ -8,7 +8,7 @@ pub struct Hand {
 
 impl Hand {
     pub unsafe fn from_raw(raw: *mut raw::Hand) -> Hand {
-        Hand { raw: raw }
+        Hand { raw }
     }
 
     /// returned id might be negative
@@ -43,7 +43,7 @@ pub struct HandList {
 
 impl HandList {
     pub unsafe fn from_raw(raw: *mut raw::HandList) -> HandList {
-        HandList { raw: raw }
+        HandList { raw }
     }
 
     pub fn len(&self) -> usize {

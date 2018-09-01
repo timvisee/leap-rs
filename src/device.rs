@@ -9,7 +9,7 @@ pub struct Device {
 
 impl Device {
     pub unsafe fn from_raw(raw: *mut raw::Device) -> Device {
-        Device { raw: raw }
+        Device { raw }
     }
 
     pub fn baseline(&self) -> f32 {
@@ -84,7 +84,7 @@ pub struct DeviceList {
 
 impl DeviceList {
     pub unsafe fn from_raw(raw: *mut raw::DeviceList) -> DeviceList {
-        DeviceList { raw: raw }
+        DeviceList { raw }
     }
 
     pub fn len(&self) -> usize {

@@ -7,7 +7,7 @@ pub struct InteractionBox {
 
 impl InteractionBox {
     pub unsafe fn from_raw(raw: *mut raw::InteractionBox) -> InteractionBox {
-        InteractionBox { raw: raw }
+        InteractionBox { raw }
     }
 
     pub fn normalize_point(&self, point: &Vector) -> Vector {
