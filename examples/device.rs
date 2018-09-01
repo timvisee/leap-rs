@@ -1,11 +1,11 @@
 extern crate leap;
 extern crate rustbox;
 
-use std::time::Duration;
 use leap::Controller;
-use rustbox::{RustBox,Key, Color};
 use rustbox::Event::KeyEvent;
 use rustbox::RB_NORMAL;
+use rustbox::{Color, Key, RustBox};
+use std::time::Duration;
 
 fn main() {
     let controller = Controller::new();
@@ -16,7 +16,7 @@ fn main() {
         show_device_infos(&rb, &controller);
 
         if let Ok(KeyEvent(Key::Char('q'))) = rb.peek_event(Duration::from_millis(100), false) {
-            break
+            break;
         }
 
         rb.present();
@@ -36,7 +36,7 @@ fn show_device_infos(rb: &RustBox, controller: &Controller) {
 
     if devices.is_empty() {
         println("No tracking device available.");
-        return
+        return;
     }
 
     for device in devices.iter() {
@@ -46,8 +46,14 @@ fn show_device_infos(rb: &RustBox, controller: &Controller) {
         println(&format!("is_streaming = {}", device.is_streaming()));
         println(&format!("range = {}", device.range()));
         println(&format!("baseline = {}", device.baseline()));
-        println(&format!("horizontal_view_angle = {}", device.horizontal_view_angle()));
-        println(&format!("vertical_view_angle = {}", device.vertical_view_angle()));
+        println(&format!(
+            "horizontal_view_angle = {}",
+            device.horizontal_view_angle()
+        ));
+        println(&format!(
+            "vertical_view_angle = {}",
+            device.vertical_view_angle()
+        ));
         // println(&format!("is_lighting_bad = {}", device.is_lighting_bad()));
         // println(&format!("is_smudged = {}", device.is_smudged()));
         println("")

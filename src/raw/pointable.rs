@@ -1,13 +1,10 @@
-use std::os::raw::{
-    c_int,
-    c_float
-};
 use super::Vector;
+use std::os::raw::{c_float, c_int};
 
 pub enum Pointable {}
 pub enum PointableList {}
 
-extern {
+extern "C" {
     pub fn lm_pointable_id(this: *mut Pointable) -> i32;
     pub fn lm_pointable_touch_distance(this: *mut Pointable) -> c_float;
     pub fn lm_pointable_stabilized_tip_position(this: *mut Pointable) -> *mut Vector;

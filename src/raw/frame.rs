@@ -1,11 +1,11 @@
-use std::os::raw::c_float;
-use super::PointableList;
 use super::HandList;
 use super::InteractionBox;
+use super::PointableList;
+use std::os::raw::c_float;
 
 pub enum Frame {}
 
-extern {
+extern "C" {
     pub fn lm_frame_delete(this: *mut Frame);
     pub fn lm_frame_current_frames_per_second(this: *mut Frame) -> c_float;
     pub fn lm_frame_pointables(this: *mut Frame) -> *mut PointableList;

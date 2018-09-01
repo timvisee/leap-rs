@@ -1,25 +1,21 @@
+use raw;
 use std::ops::Deref;
 use std::ptr;
-use raw;
+use DeviceList;
 use Frame;
 use Listener;
-use DeviceList;
 
 pub struct Controller {
-    raw: *mut raw::Controller
+    raw: *mut raw::Controller,
 }
 
 impl Controller {
     pub fn new() -> Controller {
-        unsafe {
-            Self::from_raw(raw::lm_controller_new())
-        }
+        unsafe { Self::from_raw(raw::lm_controller_new()) }
     }
 
     pub unsafe fn from_raw(raw: *mut raw::Controller) -> Controller {
-        Controller {
-            raw: raw
-        }
+        Controller { raw: raw }
     }
 
     pub unsafe fn from_raw_ref(raw: *const raw::Controller) -> Ref {
@@ -27,27 +23,19 @@ impl Controller {
     }
 
     pub fn with_listener<L: Listener + Send>(listener: L) -> Controller {
-        unsafe {
-            Self::from_raw(raw::lm_controller_with_listener(listener.into()))
-        }
+        unsafe { Self::from_raw(raw::lm_controller_with_listener(listener.into())) }
     }
 
     pub fn is_connected(&self) -> bool {
-        unsafe {
-            raw::lm_controller_is_connected(self.raw)
-        }
+        unsafe { raw::lm_controller_is_connected(self.raw) }
     }
 
     pub fn frame(&self) -> Frame {
-        unsafe {
-            Frame::from_raw(raw::lm_controller_frame(self.raw))
-        }
+        unsafe { Frame::from_raw(raw::lm_controller_frame(self.raw)) }
     }
 
     pub fn devices(&self) -> DeviceList {
-        unsafe {
-            DeviceList::from_raw(raw::lm_controller_devices(self.raw))
-        }
+        unsafe { DeviceList::from_raw(raw::lm_controller_devices(self.raw)) }
     }
 }
 
@@ -63,14 +51,14 @@ impl Drop for Controller {
 }
 
 pub struct Ref {
-    inner: Controller
+    inner: Controller,
 }
 
 impl Ref {
     fn from_raw(raw: *const raw::Controller) -> Ref {
         unsafe {
             Ref {
-                inner: Controller::from_raw(raw as *mut _)
+                inner: Controller::from_raw(raw as *mut _),
             }
         }
     }

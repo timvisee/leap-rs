@@ -1,8 +1,8 @@
-use libc::c_void;
 use super::Controller;
+use libc::c_void;
 
 pub type Listener = *mut c_void;
-pub type ListenerHandler = unsafe extern fn(Listener, *const Controller);
+pub type ListenerHandler = unsafe extern "C" fn(Listener, *const Controller);
 
 // KEEP IN PERFECT SYNC WITH LM_FFIListener from wrapper/listener.h
 #[repr(C)]

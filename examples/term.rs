@@ -1,11 +1,11 @@
 extern crate leap;
 extern crate rustbox;
 
-use std::time::Duration;
 use leap::Controller;
-use rustbox::{RustBox,Key, Color};
 use rustbox::Event::KeyEvent;
 use rustbox::RB_NORMAL;
+use rustbox::{Color, Key, RustBox};
+use std::time::Duration;
 
 // TODO: Properly map leap motion space to terminal space
 
@@ -23,7 +23,7 @@ fn main() {
             let mut x = rb.width() as f32;
             let mut y = rb.height() as f32;
 
-            x *=       point.x();
+            x *= point.x();
             y *= 1.0 - point.y();
 
             let x = x.round() as usize;
@@ -31,13 +31,19 @@ fn main() {
 
             if x < 2000 && y < 2000 {
                 let fg_color = color_from_i32(pointable.id());
-                rb.print(x, y, RB_NORMAL, fg_color, Color::Default, &format!("# {}", pointable.id()));
+                rb.print(
+                    x,
+                    y,
+                    RB_NORMAL,
+                    fg_color,
+                    Color::Default,
+                    &format!("# {}", pointable.id()),
+                );
             }
-
         }
 
         if let Ok(KeyEvent(Key::Char('q'))) = rb.peek_event(Duration::from_millis(10), false) {
-            break
+            break;
         }
 
         rb.present();
@@ -56,6 +62,6 @@ fn color_from_i32(n: i32) -> Color {
         3 => Magenta,
         4 => Yellow,
         5 => Cyan,
-        _ => unreachable!()
+        _ => unreachable!(),
     }
 }

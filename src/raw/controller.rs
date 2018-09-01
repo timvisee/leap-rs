@@ -1,8 +1,8 @@
-use super::{Frame, FFIListener, DeviceList};
+use super::{DeviceList, FFIListener, Frame};
 
 pub enum Controller {}
 
-extern {
+extern "C" {
     pub fn lm_controller_new() -> *mut Controller;
     pub fn lm_controller_with_listener(listener: FFIListener) -> *mut Controller;
     pub fn lm_controller_is_connected(this: *mut Controller) -> bool;

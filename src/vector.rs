@@ -1,57 +1,41 @@
-use std::ops::{Mul, MulAssign};
 use raw;
+use std::ops::{Mul, MulAssign};
 
 pub struct Vector {
-    raw: *mut raw::Vector
+    raw: *mut raw::Vector,
 }
 
 impl Vector {
     pub fn new(x: f32, y: f32, z: f32) -> Vector {
-        unsafe {
-            Self::from_raw(raw::lm_vector_new(x, y, z))
-        }
+        unsafe { Self::from_raw(raw::lm_vector_new(x, y, z)) }
     }
 
     pub unsafe fn from_raw(raw: *mut raw::Vector) -> Vector {
-        Vector {
-            raw: raw
-        }
+        Vector { raw: raw }
     }
 
     pub fn x(&self) -> f32 {
-        unsafe {
-            raw::lm_vector_x(self.raw)
-        }
+        unsafe { raw::lm_vector_x(self.raw) }
     }
 
     pub fn y(&self) -> f32 {
-        unsafe {
-            raw::lm_vector_y(self.raw)
-        }
+        unsafe { raw::lm_vector_y(self.raw) }
     }
 
     pub fn z(&self) -> f32 {
-        unsafe {
-            raw::lm_vector_z(self.raw)
-        }
+        unsafe { raw::lm_vector_z(self.raw) }
     }
 
     pub fn yaw(&self) -> f32 {
-        unsafe {
-            raw::lm_vector_yaw(self.raw)
-        }
+        unsafe { raw::lm_vector_yaw(self.raw) }
     }
 
     pub fn pitch(&self) -> f32 {
-        unsafe {
-            raw::lm_vector_pitch(self.raw)
-        }
+        unsafe { raw::lm_vector_pitch(self.raw) }
     }
 
     pub fn roll(&self) -> f32 {
-        unsafe {
-            raw::lm_vector_roll(self.raw)
-        }
+        unsafe { raw::lm_vector_roll(self.raw) }
     }
 
     pub fn as_raw(&self) -> *mut raw::Vector {
@@ -62,18 +46,14 @@ impl Vector {
 impl<'a> Mul<f32> for &'a Vector {
     type Output = Vector;
     fn mul(self, factor: f32) -> Self::Output {
-        unsafe {
-            Vector::from_raw(raw::lm_vector_mul(self.raw, factor))
-        }
+        unsafe { Vector::from_raw(raw::lm_vector_mul(self.raw, factor)) }
     }
 }
 
 impl<'a> Mul<&'a Vector> for f32 {
     type Output = Vector;
     fn mul(self, vector: &'a Vector) -> Self::Output {
-        unsafe {
-            Vector::from_raw(raw::lm_vector_mul(vector.raw, self))
-        }
+        unsafe { Vector::from_raw(raw::lm_vector_mul(vector.raw, self)) }
     }
 }
 

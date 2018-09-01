@@ -1,7 +1,6 @@
-
 pub enum Vector {}
 
-extern {
+extern "C" {
     pub fn lm_vector_new(x: f32, y: f32, z: f32) -> *mut Vector;
     pub fn lm_vector_x(this: *mut Vector) -> f32;
     pub fn lm_vector_y(this: *mut Vector) -> f32;
