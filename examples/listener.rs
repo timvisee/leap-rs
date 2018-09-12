@@ -23,7 +23,7 @@ impl leap::Listener for DemoListener {
         println!(
             "fps = {}, pointables = {}",
             frame.current_fps(),
-            frame.pointables().len()
+            frame.pointables().len(),
         );
         for pointable in frame.pointables().iter() {
             let stp = pointable.stabilized_tip_position();

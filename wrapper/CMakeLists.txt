@@ -8,6 +8,7 @@ set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_library (leap_motion_wrapper STATIC
     controller.cpp
+    finger.cpp
     frame.cpp
     pointable.cpp
     vector.cpp
