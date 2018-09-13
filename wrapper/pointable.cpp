@@ -21,6 +21,14 @@ extern "C" {
         delete self;
     }
 
+    bool lm_pointable_is_extended(LM_Pointable self) {
+        return self->isExtended();
+    }
+
+    LM_PointableList lm_pointable_list_extended(LM_PointableList self) {
+        return new Leap::PointableList(self->extended());
+    }
+
     LM_LIST_IMPL(Pointable, pointable)
     LM_LIST_SPATIAL_IMPL(Pointable, pointable)
 }

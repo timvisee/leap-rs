@@ -25,6 +25,14 @@ extern "C" {
         return self->type();
     }
 
+    bool lm_finger_is_extended(LM_Finger self) {
+        return self->isExtended();
+    }
+
+    LM_FingerList lm_finger_list_extended(LM_FingerList self) {
+        return new Leap::FingerList(self->extended());
+    }
+
     LM_LIST_IMPL(Finger, finger)
     LM_LIST_SPATIAL_IMPL(Finger, finger)
 }

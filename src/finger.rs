@@ -38,6 +38,10 @@ impl Finger {
     pub fn type_id(&self) -> u32 {
         unsafe { raw::lm_finger_type(self.raw) }
     }
+
+    pub fn is_extended(&self) -> bool {
+        unsafe { raw::lm_finger_is_extended(self.raw) }
+    }
 }
 
 impl Drop for Finger {
@@ -63,6 +67,10 @@ impl FingerList {
 
     pub fn is_empty(&self) -> bool {
         unsafe { raw::lm_finger_list_is_empty(self.raw) }
+    }
+
+    pub fn extended(&self) -> FingerList {
+        unsafe { FingerList::from_raw(raw::lm_finger_list_extended(self.raw)) }
     }
 
     pub fn frontmost(&self) -> Option<Finger> {

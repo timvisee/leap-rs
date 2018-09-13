@@ -19,6 +19,7 @@ impl leap::Listener for DemoListener {
     }
 
     fn on_frame(&mut self, controller: &Controller) {
+        // Get the frame, report information
         let frame = controller.frame();
         println!(
             "fps = {}, pointables = {}, fingers = {}",
@@ -26,6 +27,8 @@ impl leap::Listener for DemoListener {
             frame.pointables().len(),
             frame.fingers().len(),
         );
+
+        // Report all pointables (includes fingers)
         for pointable in frame.pointables().iter() {
             let stp = pointable.stabilized_tip_position();
             println!(
@@ -37,18 +40,22 @@ impl leap::Listener for DemoListener {
                 stp.z(),
             );
         }
+
+        // Report all fingers
         for finger in frame.fingers().iter() {
             let stp = finger.stabilized_tip_position();
             println!(
-                "[f]: id = {}, type = {}, td = {}, stp = ({}, {}, {})",
+                "[f]: id = {}, type = {}, extended = {}, td = {}, stp = ({}, {}, {})",
                 finger.id(),
                 finger.type_enum(),
+                finger.is_extended(),
                 finger.touch_distance(),
                 stp.x(),
                 stp.y(),
                 stp.z(),
             );
         }
+
         println!("--------------------------------");
         sleep_ms(150);
     }
