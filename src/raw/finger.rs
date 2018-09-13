@@ -18,5 +18,6 @@ extern "C" {
     pub fn lm_finger_list_rightmost(this: *mut FingerList) -> *mut Finger;
     pub fn lm_finger_list_delete(this: *mut FingerList);
     pub fn lm_finger_list_at(this: *mut FingerList, index: c_int) -> *mut Finger;
+    pub fn lm_finger_list_finger_type(this: *mut FingerList, finger_type: u32) -> *mut FingerList;
     pub fn lm_finger_list_extended(this: *mut FingerList) -> *mut FingerList;
 }

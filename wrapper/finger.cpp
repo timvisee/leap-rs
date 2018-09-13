@@ -29,6 +29,10 @@ extern "C" {
         return self->isExtended();
     }
 
+    LM_FingerList lm_finger_list_finger_type(LM_FingerList self, uint32_t type) {
+        return new Leap::FingerList(self->fingerType((Leap::Finger::Type) type));
+    }
+
     LM_FingerList lm_finger_list_extended(LM_FingerList self) {
         return new Leap::FingerList(self->extended());
     }

@@ -6,7 +6,7 @@ pub mod controller;
 pub use controller::Controller;
 
 pub mod finger;
-pub use finger::{Finger, FingerList};
+pub use finger::{Finger, FingerList, FingerType};
 
 pub mod frame;
 pub use frame::Frame;

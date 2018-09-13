@@ -27,8 +27,8 @@ impl Finger {
     }
 
     /// Get the finger type as enum
-    pub fn type_enum(&self) -> Type {
-        Type::from_id(self.type_id()).unwrap()
+    pub fn type_enum(&self) -> FingerType {
+        FingerType::from_id(self.type_id()).unwrap()
     }
 
     /// Get the finger ID
@@ -67,6 +67,14 @@ impl FingerList {
 
     pub fn is_empty(&self) -> bool {
         unsafe { raw::lm_finger_list_is_empty(self.raw) }
+    }
+
+    pub fn finger_type(&self, finger_type: FingerType) -> FingerList {
+        self.finger_type_id(finger_type.id())
+    }
+
+    fn finger_type_id(&self, finger_type: u32) -> FingerList {
+        unsafe { FingerList::from_raw(raw::lm_finger_list_finger_type(self.raw, finger_type)) }
     }
 
     pub fn extended(&self) -> FingerList {
@@ -152,7 +160,7 @@ impl<'a> Iterator for Iter<'a> {
 
 /// Finger type
 #[derive(Copy, Clone)]
-pub enum Type {
+pub enum FingerType {
     /// The thumb
     Thumb,
 
@@ -169,18 +177,18 @@ pub enum Type {
     Pinky,
 }
 
-impl Type {
+impl FingerType {
     /// Get the finger type from the given `id`,
     /// provided by the Leap Motion library.
     ///
     /// If the `id` is invalid, `None` is returned.
     pub fn from_id(id: u32) -> Option<Self> {
         match id {
-            0 => Some(Type::Thumb),
-            1 => Some(Type::Index),
-            2 => Some(Type::Middle),
-            3 => Some(Type::Ring),
-            4 => Some(Type::Pinky),
+            0 => Some(FingerType::Thumb),
+            1 => Some(FingerType::Index),
+            2 => Some(FingerType::Middle),
+            3 => Some(FingerType::Ring),
+            4 => Some(FingerType::Pinky),
             _ => None,
         }
     }
@@ -188,11 +196,11 @@ impl Type {
     /// Get the finger type ID
     pub fn id(&self) -> u32 {
         match self {
-            Type::Thumb => 0,
-            Type::Index => 1,
-            Type::Middle => 2,
-            Type::Ring => 3,
-            Type::Pinky => 4,
+            FingerType::Thumb => 0,
+            FingerType::Index => 1,
+            FingerType::Middle => 2,
+            FingerType::Ring => 3,
+            FingerType::Pinky => 4,
         }
     }
 
@@ -206,16 +214,16 @@ impl Type {
     /// - `"pinky"`
     pub fn name(&self) -> &'static str {
         match self {
-            Type::Thumb => "thumb",
-            Type::Index => "index",
-            Type::Middle => "middle",
-            Type::Ring => "ring",
-            Type::Pinky => "pinky",
+            FingerType::Thumb => "thumb",
+            FingerType::Index => "index",
+            FingerType::Middle => "middle",
+            FingerType::Ring => "ring",
+            FingerType::Pinky => "pinky",
         }
     }
 }
 
-impl Display for Type {
+impl Display for FingerType {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         write!(f, "{}", self.name())
     }
