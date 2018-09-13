@@ -1,4 +1,5 @@
 use raw;
+use FingerList;
 use HandList;
 use InteractionBox;
 use PointableList;
@@ -14,6 +15,10 @@ impl Frame {
 
     pub fn current_fps(&self) -> f32 {
         unsafe { raw::lm_frame_current_frames_per_second(self.raw) }
+    }
+
+    pub fn fingers(&self) -> FingerList {
+        unsafe { FingerList::from_raw(raw::lm_frame_fingers(self.raw)) }
     }
 
     pub fn pointables(&self) -> PointableList {

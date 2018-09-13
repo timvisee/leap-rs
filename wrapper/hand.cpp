@@ -1,6 +1,7 @@
 #include <cstdint>
 #include <Leap.h>
 #include "hand.h"
+#include "finger.h"
 #include "vector.h"
 #include "list.h"
 
@@ -8,6 +9,10 @@ extern "C" {
     int32_t lm_hand_id(LM_Hand self) {
         return self->id();
     }
+
+    /* LM_FingerList lm_frame_fingers(LM_Hand self) { */
+    /*     return new Leap::FingerList(self->fingers()); */
+    /* } */
 
     float lm_hand_pinch_distance(LM_Hand self) {
         // TODO: use pinchDistance() once Leap SDK 3.x releases

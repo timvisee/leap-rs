@@ -1,6 +1,9 @@
 pub mod controller;
 pub use self::controller::*;
 
+pub mod finger;
+pub use self::finger::*;
+
 pub mod frame;
 pub use self::frame::*;
 

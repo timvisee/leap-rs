@@ -23,6 +23,10 @@ impl Pointable {
     pub fn stabilized_tip_position(&self) -> Vector {
         unsafe { Vector::from_raw(raw::lm_pointable_stabilized_tip_position(self.raw)) }
     }
+
+    pub fn is_extended(&self) -> bool {
+        unsafe { raw::lm_pointable_is_extended(self.raw) }
+    }
 }
 
 impl Drop for Pointable {
@@ -50,12 +54,40 @@ impl PointableList {
         unsafe { raw::lm_pointable_list_is_empty(self.raw) }
     }
 
+    pub fn extended(&self) -> PointableList {
+        unsafe { PointableList::from_raw(raw::lm_pointable_list_extended(self.raw)) }
+    }
+
     pub fn frontmost(&self) -> Option<Pointable> {
         unsafe {
             if self.is_empty() {
                 None
             } else {
                 Some(Pointable::from_raw(raw::lm_pointable_list_frontmost(
+                    self.raw,
+                )))
+            }
+        }
+    }
+
+    pub fn leftmost(&self) -> Option<Pointable> {
+        unsafe {
+            if self.is_empty() {
+                None
+            } else {
+                Some(Pointable::from_raw(raw::lm_pointable_list_leftmost(
+                    self.raw,
+                )))
+            }
+        }
+    }
+
+    pub fn rightmost(&self) -> Option<Pointable> {
+        unsafe {
+            if self.is_empty() {
+                None
+            } else {
+                Some(Pointable::from_raw(raw::lm_pointable_list_rightmost(
                     self.raw,
                 )))
             }
