@@ -29,23 +29,24 @@ impl leap::Listener for DemoListener {
         for pointable in frame.pointables().iter() {
             let stp = pointable.stabilized_tip_position();
             println!(
-                "[p]: id = {id}, td = {td:.1}, stp = ({x:.1}, {y:.1}, {z:.1})",
-                id = pointable.id(),
-                td = pointable.touch_distance(),
-                x = stp.x(),
-                y = stp.y(),
-                z = stp.z(),
+                "[p]: id = {}, td = {}, stp = ({}, {}, {})",
+                pointable.id(),
+                pointable.touch_distance(),
+                stp.x(),
+                stp.y(),
+                stp.z(),
             );
         }
         for finger in frame.fingers().iter() {
             let stp = finger.stabilized_tip_position();
             println!(
-                "[f]: id = {id}, td = {td:.1}, stp = ({x:.1}, {y:.1}, {z:.1})",
-                id = finger.id(),
-                td = finger.touch_distance(),
-                x = stp.x(),
-                y = stp.y(),
-                z = stp.z(),
+                "[f]: id = {}, type = {}, td = {}, stp = ({}, {}, {})",
+                finger.id(),
+                finger.type_enum(),
+                finger.touch_distance(),
+                stp.x(),
+                stp.y(),
+                stp.z(),
             );
         }
         println!("--------------------------------");

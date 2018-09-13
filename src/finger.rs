@@ -1,5 +1,7 @@
-use raw;
 use std::os::raw::c_int;
+use std::fmt::{self, Display, Formatter};
+
+use raw;
 use Vector;
 
 pub struct Finger {
@@ -22,6 +24,19 @@ impl Finger {
 
     pub fn stabilized_tip_position(&self) -> Vector {
         unsafe { Vector::from_raw(raw::lm_finger_stabilized_tip_position(self.raw)) }
+    }
+
+    /// Get the finger type as enum
+    pub fn type_enum(&self) -> Type {
+        Type::from_id(self.type_id()).unwrap()
+    }
+
+    /// Get the finger ID
+    ///
+    /// The ID is defined by the Leap Motion SDK.
+    /// To use a Rust enum, take a look at the `take_enum` method instead.
+    pub fn type_id(&self) -> u8 {
+        unsafe { raw::lm_finger_type(self.raw) }
     }
 }
 
@@ -130,5 +145,76 @@ impl<'a> Iterator for Iter<'a> {
         } else {
             None
         }
+    }
+}
+
+/// Finger type
+#[derive(Copy, Clone)]
+pub enum Type {
+    /// The thumb
+    Thumb,
+
+    /// The index or fore-finger
+    Index,
+
+    /// The middle finger
+    Middle,
+
+    /// The ring finger
+    Ring,
+
+    /// The pinky or little finger
+    Pinky,
+}
+
+impl Type {
+    /// Get the finger type from the given `id`,
+    /// provided by the Leap Motion library.
+    ///
+    /// If the `id` is invalid, `None` is returned.
+    pub fn from_id(id: u8) -> Option<Self> {
+        match id {
+            0 => Some(Type::Thumb),
+            1 => Some(Type::Index),
+            2 => Some(Type::Middle),
+            3 => Some(Type::Ring),
+            4 => Some(Type::Pinky),
+            _ => None,
+        }
+    }
+
+    /// Get the finger type ID
+    pub fn id(&self) -> u8 {
+        match self {
+            Type::Thumb => 0,
+            Type::Index => 1,
+            Type::Middle => 2,
+            Type::Ring => 3,
+            Type::Pinky => 4,
+        }
+    }
+
+    /// Get the lowerface finger name
+    ///
+    /// It will be one of:
+    /// - `"thumb"`
+    /// - `"index"`
+    /// - `"middle"`
+    /// - `"ring"`
+    /// - `"pinky"`
+    pub fn name(&self) -> &'static str {
+        match self {
+            Type::Thumb => "thumb",
+            Type::Index => "index",
+            Type::Middle => "middle",
+            Type::Ring => "ring",
+            Type::Pinky => "pinky",
+        }
+    }
+}
+
+impl Display for Type {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        write!(f, "{}", self.name())
     }
 }

@@ -9,6 +9,7 @@ extern "C" {
     pub fn lm_finger_touch_distance(this: *mut Finger) -> c_float;
     pub fn lm_finger_stabilized_tip_position(this: *mut Finger) -> *mut Vector;
     pub fn lm_finger_delete(this: *mut Finger);
+    pub fn lm_finger_type(this: *mut Finger) -> u8;
     pub fn lm_finger_list_count(this: *mut FingerList) -> c_int;
     pub fn lm_finger_list_is_empty(this: *mut FingerList) -> bool;
     pub fn lm_finger_list_frontmost(this: *mut FingerList) -> *mut Finger;

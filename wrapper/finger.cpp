@@ -21,6 +21,10 @@ extern "C" {
         delete self;
     }
 
+    int8_t lm_finger_type(LM_Finger self) {
+        return self->type();
+    }
+
     LM_LIST_IMPL(Finger, finger)
     LM_LIST_SPATIAL_IMPL(Finger, finger)
 }
