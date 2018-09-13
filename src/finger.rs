@@ -1,5 +1,5 @@
-use std::os::raw::c_int;
 use std::fmt::{self, Display, Formatter};
+use std::os::raw::c_int;
 
 use raw;
 use Vector;
@@ -70,9 +70,7 @@ impl FingerList {
             if self.is_empty() {
                 None
             } else {
-                Some(Finger::from_raw(raw::lm_finger_list_frontmost(
-                    self.raw,
-                )))
+                Some(Finger::from_raw(raw::lm_finger_list_frontmost(self.raw)))
             }
         }
     }
@@ -82,9 +80,7 @@ impl FingerList {
             if self.is_empty() {
                 None
             } else {
-                Some(Finger::from_raw(raw::lm_finger_list_leftmost(
-                    self.raw,
-                )))
+                Some(Finger::from_raw(raw::lm_finger_list_leftmost(self.raw)))
             }
         }
     }
@@ -94,9 +90,7 @@ impl FingerList {
             if self.is_empty() {
                 None
             } else {
-                Some(Finger::from_raw(raw::lm_finger_list_rightmost(
-                    self.raw,
-                )))
+                Some(Finger::from_raw(raw::lm_finger_list_rightmost(self.raw)))
             }
         }
     }
