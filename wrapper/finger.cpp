@@ -21,18 +21,6 @@ extern "C" {
         delete self;
     }
 
-    // TODO: int lm_finger_list_count(LM_FingerList self) {
-    // TODO:     return 5;
-    // TODO: }
-
-    void lm_finger_list_delete(LM_FingerList self) {
-        delete self;
-    }
-
-    // TODO: LM_Finger _finger_list_at(LM_FingerList self, int index) {
-    // TODO:     return new Leap::Finger(self[index]);
-    // TODO: }
-
-    // LM_LIST_IMPL(Finger, finger)
-    // LM_LIST_SPATIAL_IMPL(Finger, finger)
+    LM_LIST_IMPL(Finger, finger)
+    LM_LIST_SPATIAL_IMPL(Finger, finger)
 }

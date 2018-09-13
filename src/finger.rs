@@ -42,22 +42,38 @@ impl FingerList {
         FingerList { raw }
     }
 
-    // TODO: pub fn len(&self) -> usize {
-    // TODO:     unsafe { raw::lm_finger_list_count(self.raw) as usize }
-    // TODO: }
+    pub fn len(&self) -> usize {
+        unsafe { raw::lm_finger_list_count(self.raw) as usize }
+    }
 
-    // TODO: pub fn get(&self, index: usize) -> Option<Finger> {
-    // TODO:     unsafe {
-    // TODO:         if index < self.len() {
-    // TODO:             Some(Finger::from_raw(raw::lm_finger_list_at(
-    // TODO:                 self.raw,
-    // TODO:                 index as c_int,
-    // TODO:             )))
-    // TODO:         } else {
-    // TODO:             None
-    // TODO:         }
-    // TODO:     }
-    // TODO: }
+    pub fn is_empty(&self) -> bool {
+        unsafe { raw::lm_finger_list_is_empty(self.raw) }
+    }
+
+    pub fn frontmost(&self) -> Option<Finger> {
+        unsafe {
+            if self.is_empty() {
+                None
+            } else {
+                Some(Finger::from_raw(raw::lm_finger_list_frontmost(
+                    self.raw,
+                )))
+            }
+        }
+    }
+
+    pub fn get(&self, index: usize) -> Option<Finger> {
+        unsafe {
+            if index < self.len() {
+                Some(Finger::from_raw(raw::lm_finger_list_at(
+                    self.raw,
+                    index as c_int,
+                )))
+            } else {
+                None
+            }
+        }
+    }
 
     pub fn iter(&self) -> Iter {
         Iter {
@@ -84,11 +100,11 @@ impl<'a> Iterator for Iter<'a> {
     type Item = Finger;
 
     fn next(&mut self) -> Option<Self::Item> {
-        // TODO: if let Some(finger) = self.list.get(self.index) {
-        // TODO:     self.index += 1;
-        // TODO:     Some(finger)
-        // TODO: } else {
+        if let Some(finger) = self.list.get(self.index) {
+            self.index += 1;
+            Some(finger)
+        } else {
             None
-        // TODO: }
+        }
     }
 }
