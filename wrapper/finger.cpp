@@ -21,7 +21,7 @@ extern "C" {
         delete self;
     }
 
-    int8_t lm_finger_type(LM_Finger self) {
+    uint32_t lm_finger_type(LM_Finger self) {
         return self->type();
     }
 

@@ -35,7 +35,7 @@ impl Finger {
     ///
     /// The ID is defined by the Leap Motion SDK.
     /// To use a Rust enum, take a look at the `take_enum` method instead.
-    pub fn type_id(&self) -> u8 {
+    pub fn type_id(&self) -> u32 {
         unsafe { raw::lm_finger_type(self.raw) }
     }
 }
@@ -172,7 +172,7 @@ impl Type {
     /// provided by the Leap Motion library.
     ///
     /// If the `id` is invalid, `None` is returned.
-    pub fn from_id(id: u8) -> Option<Self> {
+    pub fn from_id(id: u32) -> Option<Self> {
         match id {
             0 => Some(Type::Thumb),
             1 => Some(Type::Index),
@@ -184,7 +184,7 @@ impl Type {
     }
 
     /// Get the finger type ID
-    pub fn id(&self) -> u8 {
+    pub fn id(&self) -> u32 {
         match self {
             Type::Thumb => 0,
             Type::Index => 1,
