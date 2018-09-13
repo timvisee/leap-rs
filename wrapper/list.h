@@ -35,4 +35,31 @@
         } \
     }
 
+#define LM_LIST_TIPPED_IMPL(TYPE, IDENT) \
+    extern "C" {                                                     \
+        int32_t lm_##IDENT##_id(LM_##TYPE self) { \
+            return self->id(); \
+        } \
+        \
+        float lm_##IDENT##_touch_distance(LM_##TYPE self) { \
+            return self->touchDistance(); \
+        } \
+        \
+        void lm_##IDENT##_delete(LM_##TYPE self) { \
+            delete self; \
+        } \
+        \
+        LM_Vector lm_##IDENT##_stabilized_tip_position(LM_##TYPE self) { \
+            return new Leap::Vector(self->stabilizedTipPosition()); \
+        } \
+        \
+        bool lm_##IDENT##_is_extended(LM_##TYPE self) { \
+            return self->isExtended(); \
+        } \
+        \
+        LM_##TYPE##List lm_##IDENT##_list_extended(LM_##TYPE##List self) { \
+            return new Leap::TYPE##List(self->extended()); \
+        } \
+    }
+
 #endif
