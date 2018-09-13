@@ -62,6 +62,30 @@ impl PointableList {
         }
     }
 
+    pub fn leftmost(&self) -> Option<Pointable> {
+        unsafe {
+            if self.is_empty() {
+                None
+            } else {
+                Some(Pointable::from_raw(raw::lm_pointable_list_leftmost(
+                    self.raw,
+                )))
+            }
+        }
+    }
+
+    pub fn rightmost(&self) -> Option<Pointable> {
+        unsafe {
+            if self.is_empty() {
+                None
+            } else {
+                Some(Pointable::from_raw(raw::lm_pointable_list_rightmost(
+                    self.raw,
+                )))
+            }
+        }
+    }
+
     pub fn get(&self, index: usize) -> Option<Pointable> {
         unsafe {
             if index < self.len() {

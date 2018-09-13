@@ -13,6 +13,8 @@ extern "C" {
     pub fn lm_hand_list_count(this: *mut HandList) -> c_int;
     pub fn lm_hand_list_is_empty(this: *mut HandList) -> bool;
     pub fn lm_hand_list_frontmost(this: *mut HandList) -> *mut Hand;
+    pub fn lm_hand_list_leftmost(this: *mut HandList) -> *mut Hand;
+    pub fn lm_hand_list_rightmost(this: *mut HandList) -> *mut Hand;
     pub fn lm_hand_list_delete(this: *mut HandList);
     pub fn lm_hand_list_at(this: *mut HandList, index: c_int) -> *mut Hand;
 }

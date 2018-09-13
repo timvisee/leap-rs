@@ -62,6 +62,30 @@ impl FingerList {
         }
     }
 
+    pub fn leftmost(&self) -> Option<Finger> {
+        unsafe {
+            if self.is_empty() {
+                None
+            } else {
+                Some(Finger::from_raw(raw::lm_finger_list_leftmost(
+                    self.raw,
+                )))
+            }
+        }
+    }
+
+    pub fn rightmost(&self) -> Option<Finger> {
+        unsafe {
+            if self.is_empty() {
+                None
+            } else {
+                Some(Finger::from_raw(raw::lm_finger_list_rightmost(
+                    self.raw,
+                )))
+            }
+        }
+    }
+
     pub fn get(&self, index: usize) -> Option<Finger> {
         unsafe {
             if index < self.len() {

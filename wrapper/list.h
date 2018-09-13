@@ -25,6 +25,14 @@
         LM_##TYPE lm_##IDENT##_list_frontmost(LM_##TYPE##List self) { \
             return new Leap::TYPE(self->frontmost()); \
         } \
+        \
+        LM_##TYPE lm_##IDENT##_list_leftmost(LM_##TYPE##List self) { \
+            return new Leap::TYPE(self->leftmost()); \
+        } \
+        \
+        LM_##TYPE lm_##IDENT##_list_rightmost(LM_##TYPE##List self) { \
+            return new Leap::TYPE(self->rightmost()); \
+        } \
     }
 
 #endif
