@@ -159,7 +159,7 @@ impl<'a> Iterator for Iter<'a> {
 }
 
 /// Finger type
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug, Hash)]
 pub enum FingerType {
     /// The thumb
     Thumb,
