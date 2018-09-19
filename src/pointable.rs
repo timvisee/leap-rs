@@ -1,6 +1,7 @@
-use raw;
 use std::os::raw::c_int;
-use Vector;
+
+use super::Vector;
+use raw;
 
 pub struct Pointable {
     raw: *mut raw::Pointable,

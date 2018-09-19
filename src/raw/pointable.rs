@@ -1,5 +1,6 @@
-use super::Vector;
 use std::os::raw::{c_float, c_int};
+
+use super::Vector;
 
 pub enum Pointable {}
 pub enum PointableList {}

@@ -1,9 +1,7 @@
+use std::{ops::Deref, ptr};
+
+use super::{DeviceList, Frame, Listener};
 use raw;
-use std::ops::Deref;
-use std::ptr;
-use DeviceList;
-use Frame;
-use Listener;
 
 pub struct Controller {
     raw: *mut raw::Controller,

@@ -1,8 +1,10 @@
-use std::fmt::{self, Display, Formatter};
-use std::os::raw::c_int;
+use std::{
+    fmt::{self, Display, Formatter},
+    os::raw::c_int,
+};
 
+use super::Vector;
 use raw;
-use Vector;
 
 pub struct Finger {
     raw: *mut raw::Finger,

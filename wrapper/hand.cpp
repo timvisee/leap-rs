@@ -2,6 +2,7 @@
 #include <Leap.h>
 #include "hand.h"
 #include "finger.h"
+#include "pointable.h"
 #include "vector.h"
 #include "list.h"
 
@@ -17,6 +18,14 @@ extern "C" {
     float lm_hand_pinch_distance(LM_Hand self) {
         // TODO: use pinchDistance() once Leap SDK 3.x releases
         return self->pinchStrength();
+    }
+
+    LM_FingerList lm_frame_fingers(LM_Hand self) {
+        return new Leap::FingerList(self->fingers());
+    }
+
+    LM_PointableList lm_frame_pointables(LM_Hand self) {
+        return new Leap::PointableList(self->pointables());
     }
 
     LM_Vector lm_hand_stabilized_palm_position(LM_Hand self) {

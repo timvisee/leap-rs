@@ -1,5 +1,6 @@
-use super::Controller;
 use libc::c_void;
+
+use super::Controller;
 
 pub type Listener = *mut c_void;
 pub type ListenerHandler = unsafe extern "C" fn(Listener, *const Controller);

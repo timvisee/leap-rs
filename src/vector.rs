@@ -1,5 +1,6 @@
-use raw;
 use std::ops::{Mul, MulAssign};
+
+use raw;
 
 pub struct Vector {
     raw: *mut raw::Vector,

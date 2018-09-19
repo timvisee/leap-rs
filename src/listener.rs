@@ -1,6 +1,7 @@
 use libc::c_void;
+
+use super::Controller;
 use raw;
-use Controller;
 
 pub trait Listener: Sized {
     fn on_exit(&mut self, &Controller) {}

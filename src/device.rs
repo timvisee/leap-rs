@@ -1,7 +1,8 @@
+use std::{ffi::CStr, str::Utf8Error};
+
 use libc::{c_char, c_int, c_void};
+
 use raw;
-use std::ffi::CStr;
-use std::str::Utf8Error;
 
 pub struct Device {
     raw: *mut raw::Device,

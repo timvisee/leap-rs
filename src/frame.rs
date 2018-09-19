@@ -1,8 +1,5 @@
+use super::{FingerList, HandList, InteractionBox, PointableList};
 use raw;
-use FingerList;
-use HandList;
-use InteractionBox;
-use PointableList;
 
 pub struct Frame {
     raw: *mut raw::Frame,

@@ -1,5 +1,5 @@
+use super::Vector;
 use raw;
-use Vector;
 
 pub struct InteractionBox {
     raw: *mut raw::InteractionBox,

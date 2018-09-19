@@ -1,5 +1,6 @@
-use super::Vector;
 use std::os::raw::{c_float, c_int};
+
+use super::{FingerList, PointableList, Vector};
 
 pub enum Hand {}
 pub enum HandList {}
@@ -7,6 +8,8 @@ pub enum HandList {}
 extern "C" {
     pub fn lm_hand_id(this: *mut Hand) -> i32;
     pub fn lm_hand_pinch_distance(this: *mut Hand) -> c_float;
+    pub fn lm_hand_fingers(this: *mut Hand) -> *mut FingerList;
+    pub fn lm_hand_pointables(this: *mut Hand) -> *mut PointableList;
     pub fn lm_hand_stabilized_palm_position(this: *mut Hand) -> *mut Vector;
     pub fn lm_hand_direction(this: *mut Hand) -> *mut Vector;
     pub fn lm_hand_delete(this: *mut Hand);

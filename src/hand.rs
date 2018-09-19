@@ -1,6 +1,7 @@
-use raw;
 use std::os::raw::c_int;
-use Vector;
+
+use super::{FingerList, PointableList, Vector};
+use raw;
 
 pub struct Hand {
     raw: *mut raw::Hand,
@@ -18,6 +19,14 @@ impl Hand {
 
     pub fn pinch_distance(&self) -> f32 {
         unsafe { raw::lm_hand_pinch_distance(self.raw) }
+    }
+
+    pub fn fingers(&self) -> FingerList {
+        unsafe { FingerList::from_raw(raw::lm_hand_fingers(self.raw)) }
+    }
+
+    pub fn pointables(&self) -> PointableList {
+        unsafe { PointableList::from_raw(raw::lm_hand_pointables(self.raw)) }
     }
 
     pub fn stabilized_palm_position(&self) -> Vector {

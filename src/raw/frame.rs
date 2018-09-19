@@ -1,8 +1,6 @@
-use super::FingerList;
-use super::HandList;
-use super::InteractionBox;
-use super::PointableList;
 use std::os::raw::c_float;
+
+use super::{FingerList, HandList, InteractionBox, PointableList};
 
 pub enum Frame {}
 

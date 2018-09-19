@@ -10,5 +10,5 @@ cmake = "0.1"
 [dependencies]
 libc = "0.2"
 
-[dev-dependencies]
-rustbox = "0.11"
+# [dev-dependencies]
+# rustbox = "0.11"
