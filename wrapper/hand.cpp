@@ -20,11 +20,11 @@ extern "C" {
         return self->pinchStrength();
     }
 
-    LM_FingerList lm_frame_fingers(LM_Hand self) {
+    LM_FingerList lm_hand_fingers(LM_Hand self) {
         return new Leap::FingerList(self->fingers());
     }
 
-    LM_PointableList lm_frame_pointables(LM_Hand self) {
+    LM_PointableList lm_hand_pointables(LM_Hand self) {
         return new Leap::PointableList(self->pointables());
     }
 
