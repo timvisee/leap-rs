@@ -1,7 +1,9 @@
 extern crate leap;
 
+use std::thread::sleep;
+use std::time::Duration;
+
 use leap::Controller;
-use std::thread::sleep_ms;
 
 fn main() {
     let controller = Controller::new();
@@ -28,6 +30,6 @@ fn main() {
         } else {
             println!("Not connected!");
         }
-        sleep_ms(150);
+        sleep(Duration::from_millis(150));
     }
 }
